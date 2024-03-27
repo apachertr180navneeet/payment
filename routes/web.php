@@ -17,6 +17,10 @@ use App\Http\Controllers\Admin\{
     AdminUserController
 };
 
+use App\Http\Controllers\Admin\Resources\{
+    SchemeManagerController
+};
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +70,16 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::get("index", [NotificationController::class, 'index'])->name('index');
             Route::get("clear", [NotificationController::class, 'clear'])->name('clear');
             Route::delete("delete/{id}", [NotificationController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('resources')->name('resources.')->group(function () {
+            Route::get("scheme/index", [SchemeManagerController::class, 'index'])->name('scheme.index');
+            Route::get("scheme/create", [SchemeManagerController::class, 'create'])->name('scheme.create');
+            Route::post("scheme/store", [SchemeManagerController::class, 'store'])->name('scheme.store');
+            Route::get("scheme/status/{id}", [SchemeManagerController::class, 'status'])->name('scheme.status');
+            Route::get("scheme/delete/{id}", [SchemeManagerController::class, 'delete'])->name('scheme.delete');
+            Route::get("scheme/edit/{id}", [SchemeManagerController::class, 'edit'])->name('scheme.edit');
+            Route::post("scheme/update", [SchemeManagerController::class, 'update'])->name('scheme.update');
         });
     });
 
