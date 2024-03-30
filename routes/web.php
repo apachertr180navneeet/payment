@@ -18,7 +18,8 @@ use App\Http\Controllers\Admin\{
 };
 
 use App\Http\Controllers\Admin\Resources\{
-    SchemeManagerController
+    SchemeManagerController,
+    CompnayManagerController
 };
 
 /*
@@ -72,14 +73,35 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::delete("delete/{id}", [NotificationController::class, 'destroy'])->name('destroy');
         });
 
-        Route::prefix('resources')->name('resources.')->group(function () {
-            Route::get("scheme/index", [SchemeManagerController::class, 'index'])->name('scheme.index');
-            Route::get("scheme/create", [SchemeManagerController::class, 'create'])->name('scheme.create');
-            Route::post("scheme/store", [SchemeManagerController::class, 'store'])->name('scheme.store');
-            Route::get("scheme/status/{id}", [SchemeManagerController::class, 'status'])->name('scheme.status');
-            Route::get("scheme/delete/{id}", [SchemeManagerController::class, 'delete'])->name('scheme.delete');
-            Route::get("scheme/edit/{id}", [SchemeManagerController::class, 'edit'])->name('scheme.edit');
-            Route::post("scheme/update", [SchemeManagerController::class, 'update'])->name('scheme.update');
+        Route::prefix('resources/scheme')->name('resources.scheme.')->group(function () {
+            Route::get("/index", [SchemeManagerController::class, 'index'])->name('index');
+            Route::get("/create", [SchemeManagerController::class, 'create'])->name('create');
+            Route::post("/store", [SchemeManagerController::class, 'store'])->name('store');
+            Route::get("/status/{id}", [SchemeManagerController::class, 'status'])->name('status');
+            Route::get("/delete/{id}", [SchemeManagerController::class, 'delete'])->name('delete');
+            Route::get("/edit/{id}", [SchemeManagerController::class, 'edit'])->name('edit');
+            Route::post("/update", [SchemeManagerController::class, 'update'])->name('seme.update');
+        });
+
+        Route::prefix('resources/scheme')->name('resources.scheme.')->group(function () {
+            Route::get("/index", [SchemeManagerController::class, 'index'])->name('index');
+            Route::get("/create", [SchemeManagerController::class, 'create'])->name('create');
+            Route::post("/store", [SchemeManagerController::class, 'store'])->name('store');
+            Route::get("/status/{id}", [SchemeManagerController::class, 'status'])->name('status');
+            Route::get("/delete/{id}", [SchemeManagerController::class, 'delete'])->name('delete');
+            Route::get("/edit/{id}", [SchemeManagerController::class, 'edit'])->name('edit');
+            Route::post("/update", [SchemeManagerController::class, 'update'])->name('seme.update');
+        });
+
+        Route::prefix('resources/company')->name('resources.company.')->group(function () {
+            Route::get("/index", [CompnayManagerController::class, 'index'])->name('index');
+            Route::get("/create", [CompnayManagerController::class, 'create'])->name('create');
+            Route::post("/store", [CompnayManagerController::class, 'store'])->name('store');
+            Route::get("/status/{id}", [CompnayManagerController::class, 'status'])->name('status');
+            Route::get("/delete/{id}", [CompnayManagerController::class, 'delete'])->name('delete');
+            Route::get("/edit/{id}", [CompnayManagerController::class, 'edit'])->name('edit');
+            Route::get("/view/{id}", [CompnayManagerController::class, 'view'])->name('view');
+            Route::post("/update", [CompnayManagerController::class, 'update'])->name('update');
         });
     });
 

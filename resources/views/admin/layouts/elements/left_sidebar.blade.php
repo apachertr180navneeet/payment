@@ -57,6 +57,12 @@
                   <div class="text-truncate" data-i18n="Collapsed menu">Scheme Manager</div>
                 </a>
               </li>
+
+              <li class="menu-item">
+                <a href="{{route('admin.resources.company.index')}}" class="menu-link">
+                  <div class="text-truncate" data-i18n="Collapsed menu">Company Manager</div>
+                </a>
+              </li>
             </ul>
           </li>
 
