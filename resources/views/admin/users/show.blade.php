@@ -13,9 +13,9 @@
     }
 </style>
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h5 class="py-2 mb-2">
-        <span class="text-primary fw-light">User Detail</span>
-    </h5>
+    <h4 class="py-3 mb-4">
+        <span class="text-muted fw-light">Users /</span> Detail
+    </h4>
     <div class="row mt-3">
         <div class="col-md-12">
             <div class="card">

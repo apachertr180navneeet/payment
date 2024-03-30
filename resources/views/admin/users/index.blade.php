@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 @section('style')
 
-@endsection  
+@endsection
 @section('content')
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h5 class="py-2 mb-2">
-        <span class="text-primary fw-light">Users</span>
-    </h5>
+    <h4 class="py-3 mb-4">
+        <span class="text-muted fw-light">Users /</span> List
+    </h4>
     <div class="row">
         <div class="col-xl-12 col-lg-12">
             <div class="card">
@@ -96,7 +96,7 @@ function userStatus(userid,status){
         message = 'User cannot login after Inactive!';
     }
 
-    
+
     Swal.fire({
         title: 'Are you sure?',
         text: message,

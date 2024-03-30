@@ -1,14 +1,14 @@
 @extends('admin.layouts.app')
 @section('style')
     <style>
-        
+
     </style>
-@endsection  
+@endsection
 @section('content')
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h5 class="py-2 mb-2">
-        <span class="text-primary fw-light">Contacts</span>
-    </h5>
+    <h4 class="py-3 mb-4">
+        <span class="text-muted fw-light">Contacts /</span> List
+    </h4>
     <div class="row">
         <div class="col-xl-12 col-lg-12">
             <div class="card">
@@ -59,7 +59,7 @@ $('#contactsTable').DataTable({
                 return '<a href="mailto:'+row.email+'">'+row.email+'</a>';
             }
         },
-  
+
         {
             data: "message",
             render: (data,type,row) => {
@@ -79,7 +79,7 @@ $('#contactsTable').DataTable({
                     return '<button type="button" class="btn btn-sm btn-danger" onclick="deletes('+row.id+')">Delete</button>';
             }
         }
-        
+
     ],
 });
 

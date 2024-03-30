@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 @section('style')
 
-@endsection  
+@endsection
 @section('content')
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h5 class="py-2 mb-2">
-        <span class="text-primary fw-light">Notifications</span>
-    </h5>
+    <h4 class="py-3 mb-4">
+        <span class="text-muted fw-light">Notification /</span> List
+    </h4>
     <div class="row">
         <div class="col-xl-12 col-lg-12">
             <div class="card profile-card">
@@ -40,7 +40,7 @@
                         {{$notifications->links("pagination::bootstrap-4")}}
                     @else
                         No notifcation found
-                    @endif    
+                    @endif
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
 <script>
     function deleteNotificatoin(id,e){
         let url = '{{ route("admin.notifications.destroy", ":id") }}';
-        url = url.replace(':id', id);   
+        url = url.replace(':id', id);
 
         Swal.fire({
             title: 'Are you sure?',
@@ -81,7 +81,7 @@
                        setFlesh('error','Something went wrong please try again');
                     }
                 });
-                
+
             }
         })
     }
