@@ -80,17 +80,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::get("/status/{id}", [SchemeManagerController::class, 'status'])->name('status');
             Route::get("/delete/{id}", [SchemeManagerController::class, 'delete'])->name('delete');
             Route::get("/edit/{id}", [SchemeManagerController::class, 'edit'])->name('edit');
-            Route::post("/update", [SchemeManagerController::class, 'update'])->name('seme.update');
-        });
-
-        Route::prefix('resources/scheme')->name('resources.scheme.')->group(function () {
-            Route::get("/index", [SchemeManagerController::class, 'index'])->name('index');
-            Route::get("/create", [SchemeManagerController::class, 'create'])->name('create');
-            Route::post("/store", [SchemeManagerController::class, 'store'])->name('store');
-            Route::get("/status/{id}", [SchemeManagerController::class, 'status'])->name('status');
-            Route::get("/delete/{id}", [SchemeManagerController::class, 'delete'])->name('delete');
-            Route::get("/edit/{id}", [SchemeManagerController::class, 'edit'])->name('edit');
-            Route::post("/update", [SchemeManagerController::class, 'update'])->name('seme.update');
+            Route::post("/update", [SchemeManagerController::class, 'update'])->name('update');
         });
 
         Route::prefix('resources/company')->name('resources.company.')->group(function () {

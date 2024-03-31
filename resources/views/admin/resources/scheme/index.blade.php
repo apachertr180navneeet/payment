@@ -6,9 +6,9 @@
 @endsection
 @section('content')
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h5 class="py-2 mb-2">
-        <span class="text-primary fw-light">Schemes</span>
-    </h5>
+    <h4 class="py-3 mb-4">
+        <span class="text-muted fw-light">Schemes /</span> List
+    </h4>
     <div class="row">
         <div class="col-md-12 mb-2 text-end">
             <a class="btn btn-secondary btn-primary" href="{{route('admin.resources.scheme.create')}}">
