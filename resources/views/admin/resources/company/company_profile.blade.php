@@ -18,7 +18,11 @@
             </div>
             <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
               <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-                <img src="{{asset('assets/admin/img/avatars/1.png')}}" alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
+                @if(empty($company->logo))
+                    <img src="{{asset('assets/admin/img/pages/profile-banner.png')}}" alt="Banner image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img" style="height: 124px !important;">
+                @else
+                    <img src="{{ asset($company->logo) }}" alt="Banner image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img" style="height: 124px !important;">
+                @endif
               </div>
               <div class="flex-grow-1 mt-3 mt-sm-5">
                 <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
@@ -38,27 +42,7 @@
     </div>
 
     {{--  Navbar pills  --}}
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="nav nav-pills flex-column flex-sm-row mb-4">
-                <li class="nav-item">
-                    <a class="nav-link active" href=""><i class="bx bx-user me-1"></i> Company Details</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><i class="bx bx-group me-1"></i> Company Logo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><i class="bx bx-grid-alt me-1"></i> Company News</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><i class="bx bx-link-alt me-1"></i> Company Notice </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><i class="bx bx-link-alt me-1"></i> Company Support Information </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    @include('admin.layouts.elements.company_menu')
 
     {{--  User Profile Content  --}}
     <div class="row">
@@ -68,11 +52,13 @@
                 <div class="card-body">
                     <small class="text-muted text-uppercase">About</small>
                     <ul class="list-unstyled mb-4 mt-3">
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span class="fw-medium mx-2">Full Name:</span> <span>John Doe</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Status:</span> <span>Active</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-star"></i><span class="fw-medium mx-2">Role:</span> <span>Developer</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-flag"></i><span class="fw-medium mx-2">Country:</span> <span>USA</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-detail"></i><span class="fw-medium mx-2">Languages:</span> <span>English</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span class="fw-medium mx-2">Company Name:</span> <span>{{ $company->companyname }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span class="fw-medium mx-2">Status:</span> <span>{{ $company->status }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="bx bx-star"></i><span class="fw-medium mx-2">Domain:</span> <span>{{ $company->domain }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="bx bx-star"></i><span class="fw-medium mx-2">UTI Code:</span> <span>{{ $company->uti_code }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="bx bx-star"></i><span class="fw-medium mx-2">Sender ID:</span> <span>{{ $company->senderid }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="bx bx-star"></i><span class="fw-medium mx-2">SMS UserName:</span> <span>{{ $company->smsusername }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="bx bx-star"></i><span class="fw-medium mx-2">SMS Password:</span> <span>{{ $company->smspassword }}</span></li>
                     </ul>
                 </div>
             </div>

@@ -90,8 +90,15 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::get("/status/{id}", [CompnayManagerController::class, 'status'])->name('status');
             Route::get("/delete/{id}", [CompnayManagerController::class, 'delete'])->name('delete');
             Route::get("/edit/{id}", [CompnayManagerController::class, 'edit'])->name('edit');
-            Route::get("/view/{id}", [CompnayManagerController::class, 'view'])->name('view');
             Route::post("/update", [CompnayManagerController::class, 'update'])->name('update');
+            Route::get("/profile/{id}", [CompnayManagerController::class, 'compnay_profile'])->name('profile');
+            Route::get("/image/{id}", [CompnayManagerController::class, 'compnay_image'])->name('image');
+            Route::post("/profile/image", [CompnayManagerController::class, 'profile_image'])->name('profile.image');
+            Route::get("/news/{id}", [CompnayManagerController::class, 'compnay_news'])->name('news');
+            Route::post("/news/store", [CompnayManagerController::class, 'news_store'])->name('news.store');
+            Route::get("/delete/{id}", [CompnayManagerController::class, 'news_delete'])->name('news.delete');
+            Route::get("/notice/{id}", [CompnayManagerController::class, 'compnay_notice'])->name('notice');
+            Route::post("/notice/store", [CompnayManagerController::class, 'notice_store'])->name('notice.store');
         });
     });
 

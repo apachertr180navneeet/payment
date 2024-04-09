@@ -2,12 +2,25 @@
 
 namespace App\Http\Controllers\Admin\Resources;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Company;
+// use App\Models\User;
+// use App\Models\Company;
+// use App\Models\Company;
+
+use App\Models\{
+    User,
+    Company,
+    CompanyNews
+};
+
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 use Mail,Hash,File,Auth,DB,Helper,Exception,Session,Redirect;
 use Carbon\Carbon;
+
 
 class CompnayManagerController extends Controller
 {
@@ -131,9 +144,103 @@ class CompnayManagerController extends Controller
     }
 
 
-    // View Data
-    public function view($id){
+    // compnay profile Data
+    public function compnay_profile($id){
         $company = Company::find($id);
-        return view('admin.resources.company.view',compact('company'));
+        return view('admin.resources.company.company_profile',compact('company'));
     }
+
+
+    // Compnay Profile Image Page
+    public function compnay_image($id){
+        $company = Company::find($id);
+        return view('admin.resources.company.company_image',compact('company'));
+    }
+
+    // Company Profie Image Change Data
+    public function profile_image(Request $request){
+        try {
+            $id = $request->profileid;
+
+            if ($request->hasFile('profileimage')) {
+                $file = $request->file('profileimage');
+                $fileName = Str::random(20) . '.' . $file->getClientOriginalExtension();
+
+                // Create a folder if it doesn't exist
+                $folderPath = 'companies/images/' . date('Y/m/') . $id;
+                Storage::disk('public')->makeDirectory($folderPath, 0777, true, true);
+
+                // Store the file
+                $filepathimage = $file->storeAs($folderPath, $fileName, 'public');
+
+                // Update the company profile
+                $company = Company::findOrFail($id);
+                $company->logo = 'storage/' . $filepathimage;
+                $company->save();
+
+                return back()->with('success', 'Company profile image updated successfully.');
+            } else {
+                return back()->with("error", "No file uploaded.");
+            }
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->with("error", $th->getMessage());
+        }
+    }
+
+
+    // Compnay News Page
+    public function compnay_news($id){
+        $company = Company::find($id);
+        $companynewsall = CompanyNews::where('company_id', $id)->orderBy('id', 'desc')->get();
+        return view('admin.resources.company.company_news',compact('company','companynewsall'));
+    }
+
+
+    // News Store Data
+    public function news_store(Request $request){
+        try {
+            $request->validate([
+                "news" => "required",
+                "billnotices" => "required",
+            ]);
+            $data = $request->all();
+            $userID = auth()->id();
+
+            $datauser = [
+                'news' => $request->news,
+                'bill_notices' => $request->billnotices,
+                'company_id' => $request->companyid,
+            ];
+
+            CompanyNews::insertGetId($datauser);
+
+            return back()->with('success', 'Company News Added successfully.');
+        } catch (\Throwable $th) {
+            return back()->with("error",$th->getMessage());
+        }
+    }
+
+    // Delete Data
+    public function news_delete($id)
+    {
+        try {
+             // $deleted = Company::where('id', $id)->delete();
+             CompanyNews::find($id)->delete();
+
+            return response()->json(['success'=>'Company News Deleted Successfully!']);
+        } catch (\Throwable $th) {
+            dd($th->getMessage);
+        }
+    }
+
+
+
+     // Compnay notice Page
+     public function compnay_notice($id){
+        $company = Company::find($id);
+        $companynewsall = CompanyNews::where('company_id', $id)->orderBy('id', 'desc')->get();
+        return view('admin.resources.company.company_notice',compact('company','companynewsall'));
+    }
+
 }

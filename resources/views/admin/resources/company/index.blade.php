@@ -46,13 +46,13 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.resources.company.edit',$company->id) }}" class="btn rounded-pill btn-outline-warning">Edit</a>
-                                        <a href="{{ route('admin.resources.company.view',$company->id) }}" class="btn rounded-pill btn-outline-info">View</a>
-                                        <button type="button" data-id="{{ $company->id }}" data-url="{{ route('admin.resources.company.delete',$company->id) }}" class="btn rounded-pill btn-outline-danger delete">Delete</button>
+                                        <a href="{{ route('admin.resources.company.edit', $company->id) }}" class="btn rounded-pill btn-outline-warning">Edit</a>
+                                        <a href="{{ route('admin.resources.company.profile', $company->id) }}" class="btn rounded-pill btn-outline-info">View</a>
+                                        {{--  <button type="button" data-id="{{ $company->id }}" data-url="{{ route('admin.resources.company.delete', $company->id) }}" class="btn rounded-pill btn-outline-danger delete">Delete</button>  --}}
                                         @if($company->status =='active')
-                                            <button type="button" data-id="{{ $company->id }}" data-status="inactive" data-url="{{ route('admin.resources.company.status',$company->id) }}" class="btn rounded-pill btn-outline-danger status">Inactive</button>
+                                            <button type="button" data-id="{{ $company->id }}" data-status="inactive" data-url="{{ route('admin.resources.company.status', $company->id) }}" class="btn rounded-pill btn-outline-danger status">Inactive</button>
                                         @else
-                                            <button type="button" data-id="{{ $company->id }}" data-status="active" data-url="{{ route('admin.resources.company.status',$company->id) }}" class="btn rounded-pill btn-outline-success status">Active</button>
+                                            <button type="button" data-id="{{ $company->id }}" data-status="active" data-url="{{ route('admin.resources.company.status', $company->id) }}" class="btn rounded-pill btn-outline-success status">Active</button>
                                         @endif
                                     </td>
                                 </tr>
