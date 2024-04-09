@@ -14,7 +14,7 @@
                 <a class="nav-link {{ request()->is("admin/resources/company/notice/{$company->id}") ? 'active' : ''}}" href="{{ route('admin.resources.company.notice',$company->id) }}"><i class="bx bx-link-alt me-1"></i> Company Notice </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="bx bx-link-alt me-1"></i> Company Support Information </a>
+                <a class="nav-link {{ request()->is("admin/resources/company/support/{$company->id}") ? 'active' : ''}}" href="{{ route('admin.resources.company.support',$company->id) }}"><i class="bx bx-link-alt me-1"></i> Company Support Information </a>
             </li>
         </ul>
     </div>

@@ -99,6 +99,8 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::get("/delete/{id}", [CompnayManagerController::class, 'news_delete'])->name('news.delete');
             Route::get("/notice/{id}", [CompnayManagerController::class, 'compnay_notice'])->name('notice');
             Route::post("/notice/store", [CompnayManagerController::class, 'notice_store'])->name('notice.store');
+            Route::get("/support/{id}", [CompnayManagerController::class, 'compnay_support'])->name('support');
+            Route::post("/support/store", [CompnayManagerController::class, 'support_store'])->name('support.store');
         });
     });
 

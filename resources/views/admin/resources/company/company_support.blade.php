@@ -7,7 +7,7 @@
 @section('content')
 <div class="container-fluid flex-grow-1 container-p-y">
     <h4 class="py-3 mb-4">
-        <span class="text-muted fw-light">Company /</span> News
+        <span class="text-muted fw-light">Company /</span> Support
     </h4>
     {{--  Header  --}}
     <div class="row">
@@ -48,15 +48,19 @@
     <div class="row">
         <div class="col-12">
           <div class="card">
-            <h5 class="card-header">Company Notice</h5>
+            <h5 class="card-header">Company Support</h5>
             <div class="card-body">
-                <form action="{{route('admin.resources.company.notice.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('admin.resources.company.support.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="companyid" value="{{ $company->id }}">
                     <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="notice" class="form-label">Notice</label>
-                            <textarea class="form-control" id="notice" name="notice" rows="3">{{$companynotice->notice ?? ""}}</textarea>
+                        <div class="col-md-6 mb-3">
+                            <label for="number" class="form-label">Contact Number</label>
+                            <textarea class="form-control" id="number" name="number" rows="3">{{$companynewsall->phone ?? ""}}</textarea>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Contact Email</label>
+                            <textarea class="form-control" id="email" name="email" rows="3">{{$companynewsall->email ?? ""}}</textarea>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Send</button>

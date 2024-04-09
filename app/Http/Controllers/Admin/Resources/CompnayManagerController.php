@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 use App\Models\{
     User,
     Company,
-    CompanyNews
+    CompanyNews,
+    CompanyNotice,
+    CompanySupport
 };
 
 use Illuminate\Support\Facades\Storage;
@@ -239,8 +241,83 @@ class CompnayManagerController extends Controller
      // Compnay notice Page
      public function compnay_notice($id){
         $company = Company::find($id);
-        $companynewsall = CompanyNews::where('company_id', $id)->orderBy('id', 'desc')->get();
-        return view('admin.resources.company.company_notice',compact('company','companynewsall'));
+        $companynotice = CompanyNotice::where('company_id', $id)->orderBy('id', 'desc')->first();
+        return view('admin.resources.company.company_notice',compact('company','companynotice'));
+    }
+
+
+    // News Store Data
+    public function notice_store(Request $request){
+        try {
+            $request->validate([
+                "notice" => "required",
+            ]);
+            $data = $request->all();
+            $userID = auth()->id();
+            $Checkcompany = CompanyNotice::where('company_id',  $request->companyid)->first();
+            if(!empty($Checkcompany)){
+                $datauser = [
+                    'notice' => $request->notice,
+                    'company_id' => $request->companyid,
+                ];
+
+                CompanyNotice::where('company_id', $request->companyid)->update($datauser);
+            }else{
+                $datauser = [
+                    'notice' => $request->notice,
+                    'company_id' => $request->companyid,
+                ];
+
+                CompanyNotice::insertGetId($datauser);
+            }
+            return back()->with('success', 'Company News Added successfully.');
+        } catch (\Throwable $th) {
+            return back()->with("error",$th->getMessage());
+        }
+    }
+
+
+    // Compnay News Page
+    public function compnay_support($id){
+        $company = Company::find($id);
+        $companynewsall = CompanySupport::where('company_id', $id)->orderBy('id', 'desc')->first();
+        return view('admin.resources.company.company_support',compact('company','companynewsall'));
+    }
+
+
+    // News Store Data
+    public function support_store(Request $request){
+        try {
+            $request->validate([
+                "number" => "required",
+                "email" => "required",
+            ]);
+            $data = $request->all();
+            $userID = auth()->id();
+
+            $Checkcompany = CompanySupport::where('company_id',  $request->companyid)->first();
+            if(!empty($Checkcompany)){
+                $datauser = [
+                    'phone' => $request->number,
+                    'email' => $request->email,
+                    'company_id' => $request->companyid,
+                ];
+
+                CompanySupport::where('company_id', $request->companyid)->update($datauser);
+            }else{
+                $datauser = [
+                    'phone' => $request->number,
+                    'email' => $request->email,
+                    'company_id' => $request->companyid,
+                ];
+
+                CompanySupport::insertGetId($datauser);
+            }
+
+            return back()->with('success', 'Company Support Added successfully.');
+        } catch (\Throwable $th) {
+            return back()->with("error",$th->getMessage());
+        }
     }
 
 }
